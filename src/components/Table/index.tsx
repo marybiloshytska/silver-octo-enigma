@@ -1,7 +1,9 @@
 import { Table as AntTable, Avatar } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-interface IUser {
+import { useNavigate } from 'react-router-dom';
+
+export interface IUser {
     avatar_url: string;
     events_url: string;
     followers_url: string;
@@ -31,6 +33,7 @@ interface IPagination {
 export const Table = () => {
     const [users, setUsers] = useState<IUser[]>([]);
     const [pagination, setPagination] = useState<IPagination>();
+    const navigate = useNavigate();
 
     async function getUsers () {
         const res = await fetch('https://api.github.com/users' + `?since=${pagination?.since}&per_page=${pagination?.pageSize}`).then(res => res.json());
@@ -89,7 +92,7 @@ export const Table = () => {
             onRow={(record, rowIndex) => {
                 return {
                 onClick: event => {
-                    console.log(record.id);
+                    navigate(`/${record.id}`);
                 },
                 };
             }}

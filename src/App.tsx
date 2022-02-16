@@ -1,13 +1,12 @@
 import './App.css';
 import 'antd/dist/antd.css';
 
-import React from 'react';
-import { Table } from './components/Table';
+import { MyRoutes } from './Routes';
 
 function App() {
   return (
     <div className="App">
-      <Table/>
+        <MyRoutes />
     </div>
   );
 }
