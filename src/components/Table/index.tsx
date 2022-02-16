@@ -1,6 +1,5 @@
+import { Table as AntTable, Avatar } from 'antd';
 import React, { useEffect, useState } from 'react';
-
-import { Table as AntTable } from 'antd';
 
 interface IUser {
     avatar_url: string;
@@ -81,7 +80,7 @@ export const Table = () => {
           title: 'Avatar',
           dataIndex: 'avatar_url',
           key: 'avatar_url',
-          render: (val: string) => <img style={{width: '50px'}} src={val} alt="alt" />
+          render: (val: string) =>  <Avatar src={val} />
         },
       ];
 
