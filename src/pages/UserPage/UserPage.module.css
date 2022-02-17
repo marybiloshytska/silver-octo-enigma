@@ -2,3 +2,10 @@
     border-radius: 50%;
     margin: 30px auto;
 }
+
+.anim div {
+    position: absolute;
+    right: 40%;
+    top: 200px;
+    z-index: 10;
+}
