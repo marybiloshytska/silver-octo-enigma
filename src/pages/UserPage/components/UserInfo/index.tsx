@@ -12,6 +12,7 @@ export const UserInfo = ({user}: {user?: IUserInfo}) => {
             <p>{user?.bio && user?.bio}</p>
         </>
     )
+
     return (
         <Card className={classes.mainCard} title={title}>
             <Card type='inner' className={classes.cardGridSmall} title="Followers ">{user?.followers || 0}</Card>
@@ -21,6 +22,6 @@ export const UserInfo = ({user}: {user?: IUserInfo}) => {
             <Card type='inner' className={classes.cardGridSmall} title="Location ">{user?.location || '-'}</Card>
             <Card type='inner' className={classes.cardGridBig} title="Email ">{user?.email || '-'}</Card>
             <Card type='inner' className={classes.cardGridBig} title="Blog ">{blog}</Card>
-      </Card>
+        </Card>
     )
 }

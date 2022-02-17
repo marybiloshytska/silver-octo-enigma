@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getUsers } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { userColumnsConfig } from '../../constants/userTableColumnsConfig';
 
 export interface IUser {
     avatar_url: string;
@@ -47,33 +48,6 @@ export const Table = () => {
         dispatch(setSince((pageSize || 0) * (page - 1)));
       };
 
-    const columns = [
-        {
-          title: 'No.',
-          dataIndex: 'id',
-          key: 'id',
-          render: (val: string) => <p>{val}</p>,
-        },
-        {
-          title: 'Login',
-          dataIndex: 'login',
-          key: 'login',
-            render: (val: string) => <p>{val}</p>,
-        },
-        {
-          title: 'Profile Link',
-          dataIndex: 'html_url',
-          key: 'html_url',
-          render: (val: string) => <a href={val} onClick={(e) => e.stopPropagation()}>{val}</a>,
-        },
-        {
-          title: 'Avatar',
-          dataIndex: 'avatar_url',
-          key: 'avatar_url',
-          render: (val: string) =>  <Avatar src={val} />
-        },
-      ];
-
     return (
         <AntTable 
             onRow={(record) => {
@@ -85,16 +59,16 @@ export const Table = () => {
                 };
             }}
             pagination={{ position: ['bottomCenter'], 
-            total: 200, 
-            onChange: handleChangePage,
-            current: currentPage,
-            pageSize: pageSize,
-            onShowSizeChange: (current, size) => {
-                dispatch(setPageSize(size));
-                dispatch(setSince(size * (current - 1)));
-            }
-        }}
-            columns={columns} dataSource={users || []} />
+                total: 200, 
+                onChange: handleChangePage,
+                current: currentPage,
+                pageSize: pageSize,
+                onShowSizeChange: (current, size) => {
+                    dispatch(setPageSize(size));
+                    dispatch(setSince(size * (current - 1)));
+                }
+            }}
+            columns={userColumnsConfig} dataSource={users || []} />
     );
 }
                  

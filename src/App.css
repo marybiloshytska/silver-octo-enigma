@@ -1,7 +1,26 @@
+:root {
+  --primary-blue: #1890ff;
+}
+
 .App {
   text-align: center;
 }
 
 .ant-table-row:hover {
   cursor: pointer;
+}
+
+.appHeader {
+  background-color: var(--primary-blue);
+  min-height: max-content;
+  width: 100%;
+  overflow: auto;
+}
+
+.appHeader h1 {
+  color: white;
+}
+
+.ant-image {
+  margin: auto;
 }

@@ -36,7 +36,7 @@ export const UserPage = () => {
           <Image src={data?.avatar_url} />
         </Image.PreviewGroup>
       </div>
-    <UserInfo user={data} />
+   {data && <UserInfo user={data} />}
     </>
   );
 };
