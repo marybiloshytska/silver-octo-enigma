@@ -1,0 +1,19 @@
+.cardGridBig {
+    text-align: center;
+    width: calc(100% - 20px);
+    margin: 10px;
+}
+.cardGridSmall {
+    margin: 10px;
+    text-align: center;
+    width: calc(50% - 20px);
+    display: inline-block;
+}
+
+.mainCard > div:last-of-type {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    -webkit-margin-collapse: separate;
+}

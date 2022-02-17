@@ -1,5 +1,5 @@
 import { ROUTES } from './constants/routes';
-import { Table } from './components/Table';
+import { Table } from './pages/Table';
 import { UserPage } from './pages/UserPage';
 import { useRoutes } from 'react-router-dom';
 

@@ -1,26 +1,56 @@
-import { IUser } from '../../components/Table';
+import { IUserInfo, ReduxState } from '../../utils/store';
+import { useEffect, useState } from 'react';
+
+import { IUser } from '../Table';
 import { Image } from 'antd';
-import { useState } from 'react';
+import { UserInfo } from './components/UserInfo';
+import classes from './UserPage.module.css';
+import { useSelector } from 'react-redux';
 
 export const UserPage = () => {
   const [visible, setVisible] = useState(false);
-  let user:Partial<IUser> = {};
-  user.avatar_url = '#';
+  const [data, setData] = useState<IUserInfo>();
+
+  const {currentUser} = useSelector((state: ReduxState) => state);
+
+  useEffect(() => {
+    if (currentUser) {
+
+    }
+  }, [currentUser]);
+
+  async function getUserData () {
+    if (currentUser) {
+        const res = await fetch(currentUser)
+            .then(res => res.json());
+        return res;
+    }
+    }
+
+    console.log(data);
+
+    useEffect(() => {
+        getUserData().then(data => {
+            setData(data);
+        });
+    }, []);
+
+
   return (
     <>
       <Image
         preview={{ visible: false }}
         width={200}
-        src={user?.avatar_url}
+        src={data?.avatar_url}
         onClick={() => setVisible(true)}
+        className={classes.roundImage}
       />
       <div style={{ display: 'none' }}>
         <Image.PreviewGroup preview={{ visible, onVisibleChange: vis => setVisible(vis) }}>
-          <Image src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp" />
-          <Image src="https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp" />
-          <Image src="https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp" />
+          <Image src={data?.avatar_url} />
         </Image.PreviewGroup>
       </div>
+    <UserInfo user={data} />
     </>
   );
 };

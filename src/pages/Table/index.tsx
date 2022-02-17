@@ -69,7 +69,7 @@ export const Table = () => {
           title: 'Profile Link',
           dataIndex: 'html_url',
           key: 'html_url',
-          render: (val: string) => <a>{val}</a>,
+          render: (val: string) => <a href={val} onClick={(e) => e.stopPropagation()}>{val}</a>,
         },
         {
           title: 'Avatar',
@@ -81,9 +81,10 @@ export const Table = () => {
 
     return (
         <AntTable 
-            onRow={(record, rowIndex) => {
+            onRow={(record) => {
                 return {
-                onClick: event => {
+                onClick: () => {
+                    dispatch(setCurrentUser(record.url));
                     navigate(`/${record.id}`);
                 },
                 };
