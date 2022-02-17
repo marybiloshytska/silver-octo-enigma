@@ -1,7 +1,6 @@
-import { IUserInfo, ReduxState } from '../../utils/store';
+import { IUserInfo, ReduxState } from '../../constants/interfaces';
 import { useEffect, useState } from 'react';
 
-import { IUser } from '../Table';
 import { Image } from 'antd';
 import { UserInfo } from './components/UserInfo';
 import classes from './UserPage.module.css';

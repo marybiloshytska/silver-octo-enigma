@@ -1,5 +1,5 @@
 import { Card } from 'antd';
-import { IUserInfo } from '../../../../utils/store';
+import { IUserInfo } from '../../../../constants/interfaces';
 import classes from './UserInfo.module.css';
 import moment from 'moment';
 

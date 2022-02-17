@@ -17,6 +17,18 @@
   overflow: auto;
 }
 
+.backTop {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+  background-color: var(--primary-blue);
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  z-index: 100000;
+}
+
 .appHeader h1 {
   color: white;
 }
