@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ReduxState, setCurrentPage, setCurrentUser, setPageSize, setSince, setUsers } from '../../utils/store';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getUsers } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 
 export interface IUser {
@@ -32,14 +33,8 @@ export const Table = () => {
     const {pageSize, currentPage, since, users} = useSelector((state: ReduxState) => state);
     const dispatch = useDispatch();
 
-    async function getUsers () {
-        const res = await fetch('https://api.github.com/users' + `?since=${since}&per_page=${pageSize}`)
-            .then(res => res.json());
-        return res;
-    }
-
     useEffect(() => {
-        getUsers().then(data => {
+        getUsers(since, pageSize).then(data => {
             dispatch(setUsers(data));
         });
     }, [pageSize, currentPage, since]);

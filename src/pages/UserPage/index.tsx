@@ -5,6 +5,7 @@ import { IUser } from '../Table';
 import { Image } from 'antd';
 import { UserInfo } from './components/UserInfo';
 import classes from './UserPage.module.css';
+import { getUserData } from '../../utils/api';
 import { useSelector } from 'react-redux';
 
 export const UserPage = () => {
@@ -15,26 +16,11 @@ export const UserPage = () => {
 
   useEffect(() => {
     if (currentUser) {
-
+      getUserData(currentUser).then(data => {
+        setData(data);
+    });
     }
   }, [currentUser]);
-
-  async function getUserData () {
-    if (currentUser) {
-        const res = await fetch(currentUser)
-            .then(res => res.json());
-        return res;
-    }
-    }
-
-    console.log(data);
-
-    useEffect(() => {
-        getUserData().then(data => {
-            setData(data);
-        });
-    }, []);
-
 
   return (
     <>
