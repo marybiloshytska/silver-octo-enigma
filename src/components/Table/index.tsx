@@ -1,5 +1,7 @@
 import { Table as AntTable, Avatar } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { ReduxState, setCurrentPage, setCurrentUser, setPageSize, setSince, setUsers } from '../../utils/store';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -24,40 +26,30 @@ export interface IUser {
     url: string;
 }
 
-interface IPagination {
-    pageSize?: number,
-    currentPage?: number,
-    since?: number
-}
 
 export const Table = () => {
-    const [users, setUsers] = useState<IUser[]>([]);
-    const [pagination, setPagination] = useState<IPagination>();
     const navigate = useNavigate();
+    const {pageSize, currentPage, since, users} = useSelector((state: ReduxState) => state);
+    const dispatch = useDispatch();
 
     async function getUsers () {
-        const res = await fetch('https://api.github.com/users' + `?since=${pagination?.since}&per_page=${pagination?.pageSize}`).then(res => res.json());
+        const res = await fetch('https://api.github.com/users' + `?since=${since}&per_page=${pageSize}`)
+            .then(res => res.json());
         return res;
     }
 
     useEffect(() => {
-        setPagination({
-            pageSize: 10,
-            currentPage: 1,
-            since: 0
-        });
-    },[]);
-
-    useEffect(() => {
         getUsers().then(data => {
-            setUsers(data);
+            dispatch(setUsers(data));
         });
-    }, [pagination]);
+    }, [pageSize, currentPage, since]);
 
 
     const handleChangePage = (page: number, pageSize?: number) => {
         window.scrollTo(0, 0);
-        setPagination({...pagination, currentPage: page, pageSize: pageSize, since: (pageSize || 0) * (page - 1)});
+        dispatch(setCurrentPage(page));
+        dispatch(setPageSize(pageSize));
+        dispatch(setSince((pageSize || 0) * (page - 1)));
       };
 
     const columns = [
@@ -99,17 +91,14 @@ export const Table = () => {
             pagination={{ position: ['bottomCenter'], 
             total: 200, 
             onChange: handleChangePage,
-            current: pagination?.currentPage,
-            pageSize: pagination?.pageSize,
+            current: currentPage,
+            pageSize: pageSize,
             onShowSizeChange: (current, size) => {
-                setPagination({
-                    ...pagination,
-                    pageSize: size,
-                    since: size * (current - 1)
-                });
+                dispatch(setPageSize(size));
+                dispatch(setSince(size * (current - 1)));
             }
         }}
-            columns={columns} dataSource={users} />
+            columns={columns} dataSource={users || []} />
     );
 }
                  
