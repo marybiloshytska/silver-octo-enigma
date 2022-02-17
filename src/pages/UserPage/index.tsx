@@ -26,23 +26,23 @@ export const UserPage = () => {
 
   return (
     <>
-      <Image
-        preview={{ visible: false }}
-        width={200}
-        src={data?.avatar_url}
-        onClick={() => setVisible(true)}
-        className={classes.roundImage}
-        onMouseEnter={() => setAnimating(false)}
-      />
-      {animating && (
       <div className={classes.anim}>
-        <Lottie 
-          width={100}
-          height={100}
-          options={{animationData}} 
-          speed={1} />
+        <Image
+          preview={{ visible: false }}
+          width={200}
+          src={data?.avatar_url}
+          onClick={() => setVisible(true)}
+          className={classes.roundImage}
+          onMouseEnter={() => setAnimating(false)}
+        />
+        {animating && (
+          <Lottie 
+            width={100}
+            height={100}
+            options={{animationData}} 
+            speed={1} />
+            )}
       </div>
-    )}
       <div style={{ display: 'none' }}>
         <Image.PreviewGroup preview={{ visible, onVisibleChange: vis => setVisible(vis) }}>
           <Image src={data?.avatar_url} />

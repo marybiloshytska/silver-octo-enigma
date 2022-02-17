@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+.ant-table-wrapper {
+  width: 100%;
+}
+
 .ant-table-row:hover {
   cursor: pointer;
 }
